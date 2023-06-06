@@ -1,0 +1,175 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+      background: #fdfcfc;
+      color: #000;
+      font-family: 'Roboto', sans-serif;
+  }
+
+/*Aca pegando para el formulario  */
+
+h1 {
+    font-family: 'Passion One';
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+
+label {
+    width: 150px;
+    display: inline-block;
+    text-align: left;
+    font-size: 1.5rem;
+    font-family: 'Lato';
+}
+input {
+    border: 2px solid #ccc;
+    font-size: 1.5rem;
+    font-weight: 100;
+    font-family: 'Lato';
+    padding: 10px;
+}
+form {
+    margin: 25px auto;
+    padding: 20px;
+    border: 5px solid #ccc;
+    width: 500px;
+    background: #2b8cc4;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #f3cfb7;
+    font-style: italic;
+    }
+    
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:  #f3cfb7;
+    font-style: italic;
+    }
+    
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:  #f3cfb7;
+    font-style: italic;
+    }
+    
+    :-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #f3cfb7;
+    font-style: italic;
+    }
+    
+    /* Aca agregar para cambiar color de boton */
+ 
+        
+
+
+    
+
+ /* Aca terminapara cambiar color de boton */
+
+div.form-element {
+    margin: 20px 0;
+}
+
+button {
+    padding: 10px;
+    font-size: 1.5rem;
+    font-family: 'Lato';
+    font-weight: 100;
+    background: #f58123;
+    color: white;
+    border: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.button:hover {
+    background-color: #dfd547;
+    color: rgb(216, 18, 18);
+}
+
+p.success,
+p.error {
+    color: white;
+    font-family: lato;
+    background: yellowgreen;
+    display: inline-block;
+    padding: 2px 10px;
+}
+p.error {
+    background: orangered;
+}
+
+  /*Aca pegando para el formulario  */
+  .header p {
+      font-size: 25px;
+      text-align: center;
+      padding: 20px 0;
+  }
+  
+  .caja-principal {
+      width: 100%;
+     
+      border:0px solid #2b8cc4;
+      margin-top: 0;
+     
+  }
+  
+  .cabecera {
+      width: 100%;
+      background-color: #2b8cc4;
+      border: 0px solid #2b8cc4;
+      margin-top: 0;
+      font-size: 20px;
+      text-align: left;
+      
+  }
+  
+  .cabecera p {
+      color: #fdfcfc;
+  }
+  
+  
+  .contenedor {
+      width: 90%;
+     
+      border:0px solid #000;
+      margin: auto;
+      font-size: 50px;
+      line-height: 50px;
+      text-align: center;
+      
+  }
+  .formulario {
+      display: block;
+      padding: 20px;
+      color: #fff;
+      background: #fdfcfc;
+      box-shadow: 2px 2px 10px #fdfcfc;(0,0,0,.25);
+  }
+
+  .cuadro-de-php{
+    font-size: 20px;
+    display: block;
+    padding: 13px;
+    color: #fff;
+    background: #2b8cc4;
+    box-shadow: 2px 2px 10px #fdfcfc(0,0,0,.25);
+  }
+
+  .marco-for-izquierdo{
+    display: block;
+    padding: 20px;
+    color: #fff;
+    background: #fdfcfc;
+    box-shadow: 2px 2px 10px #fdfcfc(0,0,0,.25);
+  }
+
+  .marco-for-derecho {
+    display: block;
+    padding: 20px;
+    color: #fff;
+    background: #fdfcfc;
+    box-shadow: 2px 2px 10px #fdfcfc(0,0,0,.25);
+  }
