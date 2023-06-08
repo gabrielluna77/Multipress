@@ -1,0 +1,123 @@
+/*
+Formulario CF7 2 columnas y responsive
+*/
+#responsive-form{
+	margin:0 auto;
+        width:100%;
+}
+
+.form-row{
+	width: 100%;
+   
+}
+
+.column-half label{
+    display: block;
+    padding: 40px 5px 5px 2px;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.column-half input,
+.column-half textarea,
+.column-half select {
+font-family: 'Lato', Calibri, Arial, sans-serif;
+line-height: 1.5;
+font-size: 1.4em;
+padding: 5px 10px;
+color: #000000;
+display: block;
+width: 100%;
+background: transparent;
+}
+
+.column-half input,
+.cbp-mc-form textarea {
+    border: 3px solid #fff;
+    background: #fff;
+}
+
+.column-half input:focus,
+.column-half textarea:focus,
+.column-half label:active + input,
+.column-half label:active + textarea {
+    outline: none;
+    border: 3px solid #4e3a0f;
+}
+
+.column-half select:focus {
+    outline: none;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+        color: #fff;
+        font-style: italic;
+}
+        
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #fff;
+        font-style: italic;
+}
+        
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #fff;
+        font-style: italic;
+}
+        
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+        color: #fff;
+        font-style: italic;
+}
+
+.cbp-mc-submit-wrap {
+    text-align: center;
+    padding-top: 40px;
+    clear: both;
+    }
+
+.cbp-mc-form input.cbp-mc-submit {
+                background: #9a6e10;
+                border: none;
+                color: #c2b684;
+                width: auto;
+                cursor: pointer;
+                text-transform: uppercase;
+                display: inline-block;
+                padding: 15px 30px;
+                font-size: 1.1em;
+                border-radius: 2px;
+                letter-spacing: 1px;
+}
+.cbp-mc-form input.cbp-mc-submit:hover {
+    background: #fff;
+    }
+
+.column-half, .column-full{
+	float: left;
+	position: relative;
+	padding: 5px 30px;
+	width: 33%;
+	-webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+
+        text-align: left;
+        
+
+}
+.clearfix:after {
+	content: "";
+	display: table;
+	clear: both;
+   
+}
+
+
+/**---------------- Media query ----------------**/
+@media only screen and (min-width: 48em) { 
+	.column-half{
+		width: 50%;
+	}
+}
+/*  Fin CF7 dos columnas */
