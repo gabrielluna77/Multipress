@@ -16,6 +16,16 @@ $fecha_entrega ='';
 $fecha ='';
 $id ='';
 $cadena ='';
+$folios ='';
+//limpiamos los textos que llegan desde el formulario
+$nom_proy ='';
+$nom_cli ='';
+$nom_prov='';
+$nom_imp ='';
+$fec_prod ='';
+$fec_entre ='';
+$pasa_n_proy ='';
+$pasa_cadena ='';
 
 //$pasar_usuario = include ('nueva_orden.php');
 //printf($pasar_usuario);
@@ -35,7 +45,7 @@ $con = mysqli_connect('localhost', 'multipresspublic_multipresspublic', 'Marjoer
 //$nombres= $_REQUEST["nombre"];
 // SE VERIFICA LA CONEXION
 if (mysqli_connect_errno()){
-    printf("Fallo la conexión: %s\n", mysqli_connect_error());
+    printf("HAY PROBLEMAS CON LA BD, LLAMAR AL PROGRAMADOR PARA SU REPARACION TEL: 2215154099: %s\n", mysqli_connect_error());
     exit();
 }
 //printf("Conjunto de caracteres inicial: %s\n", mysqli_character_set_name($con));
@@ -52,7 +62,8 @@ if (!mysqli_set_charset($con, "utf8")) {
 //print "<p>Su  $_REQUEST[nom_proy]</p>\n";
 $nom_proy = $_REQUEST["nom_proy"];
 $nombre_proyecto = html_entity_decode($nom_proy, ENT_QUOTES | ENT_HTML401, "UTF-8");
-//print "<p>Su  $_REQUEST[nom_cliente]</p>\n";
+//pasamos la variable del nombre de proyecto por el formulario
+$pasa_n_proy = $nombre_proyecto;
 $nom_cli = $_REQUEST["nom_cliente"];
 $nombre_cliente = html_entity_decode($nom_cli, ENT_QUOTES | ENT_HTML401, "UTF-8");
 //print "<p> Su $_REQUEST[nom_prove]";
@@ -73,7 +84,7 @@ $nom_dis = $_SESSION['usuario'];
 
 date_default_timezone_set('America/Mexico_City');
 $fecha =date("Y/m/d H:i:s");
-echo ($fecha);
+//echo ($fecha);
 //Aca el folio de cada orden
 $folios = 'M';
 $sql = "INSERT INTO orden_prod(clave, fecha_cre_op, folio_op, nom_disenador, nombre_proy, nom_alternos, cliente, proveedor, impresoras, fecha_prod, fecha_entrega, prod_cant_entre_cliente, prod_cant_entre_almacen, descrip_prod_terminado, muestra_imagen, suaje_almacen, laminas_almacen, papel_otro, prueba_color, distribucion, emp_manejo, cant_paquetes, cant_x_paquete) VALUES (NULL, '$fecha', '$folios', '$nom_dis', '$nombre_proyecto', NULL, '$nombre_cliente', '$nombre_prov', '$nom_impresora', '$fecha_producc', '$fecha_entrega', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
@@ -82,28 +93,23 @@ $resultado = mysqli_query($con, $sql) or die ('Error: '. mysqli_error($con));
 //Enseguida sacamos el id y le hacemos update a la tabla
 $id =mysqli_insert_id($con); 
 $cadena = $folios.$id;
-echo ($cadena);
+//Pasamos el folio a una cadena por formulario
+$pasa_cadena = $cadena;
 $ssql = "update orden_prod set folio_op='$cadena' Where clave='$id'";
-
 // Ejecutamos la sentencia de actualización
 if($con->query($ssql)) {
-  echo '<p>Cliente actualizado con éxito</p>';
+  //echo '<p>CONTINUAR CAPTURANDO LA ORDEN</p>';
 } else {
-  echo '<p>Hubo un error al actualizar el cliente: ' . $con->error . '</p>';
+  //echo '<p>Hubo un error al generar folio de orden P.: ' . $con->error . '</p>';
 }
-
-
-
-
-
-
-
 //$folios = $folios +1;
 $sql = null;
+$ssql= null;
+$resultado = null;
 //limpiamos la consulta
 mysqli_close($con);
 ?>
-<!--
+<!-- TERMINA EL CÓDIGO PHP, INICIA HTML -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -113,7 +119,7 @@ mysqli_close($con);
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link rel="stylesheet" href="./css/estilos_post_orden.css">
 	<link rel="stylesheet" href="./css/grid-new_orden.css">
-    <link rel="stylesheet" href="./css/estilos_form_papel.css">
+    <link rel="stylesheet" href="./css/estilos_form_sigue_papel.css">
   
     
     
@@ -128,59 +134,84 @@ mysqli_close($con);
      <div>ATRASADAS</div>
      <div>SALIR</div>
      
-    </div>
+    </div><!-- aca termina primer contenedor sin problema -->
     <div class="barra-del-contenido">
-       //INICIA FORMULARIO<div class="barra-lateral">
+       <!--INICIA FORMULARIO<div class="barra-lateral">
         
-        //</div>
+        </div>-->
        <div class="barra-de-trabajo">
-           //INICIA FORMULARIO
+           <!--INICIA FORMULARIO-->
           
           <div class="para-enmarcar">
-            // INICIA FORMULARIO
-              
-            <form class="cbp-mc-form" method="post" action="guardar_papel.php">
+            <!-- INICIA FORMULARIO -->
+            <!-- metemos a otro div formulario -->
+              <div  id="responsive-form" class="clearfix"><!--Esta es la caja del contenedor del formulario-->
+                    <form  method="post" action="guardar_papel.php" class="cbp-mc-form">
                 
-                 <div class="cbp-mc-column">
-                      
-                       <label for="cant_laminas">CANTIDAD DE LAMINAS A USAR:</label>
-                       <input type="text" id="canti_laminas" name="canti_laminas" placeholder="Ejemplo: 4, 5.1,15.9,134">
-                       <label for="des_laminas">LAMINAS:</label>
-                       <input type="text" id="des_laminas" name="des_laminas" placeholder="Ejemplo: AGA">
-                       <label for="la_tamano">TAMAÑO:</label>
-                       <input type="text" id="lam_tamano" name="lam_tamano" placeholder=" Ejemplo: 740X605">
-                       
-                       //ACA TERMINA PRIMER DIV//
-                      
-                       </div>
-                       
-                       //ACA TERMINA PRIMER DIV//
-                       <div class="cbp-mc-column">
-                       <label for="tipo_suaje">SUAJE:</label>
-                       <input type="text" id="tipo_suaje" name="tipo_suaje" placeholder=" Ejemplo: ALMACEN">
-                       <label for="des_impre">DESCRIPCIÓN DE IMPRESIÓN:</label>
-                       <input type="text" id="des_impre" name="des_impre" placeholder=" Ejemplo: IMPRESION 4X0">                 
-                        </div>
-                        //ACA TERMINA SEGUNDO DIV //
-                       <div class="cbp-mc-column">
-                     
-                      </div>
-                      // ACA TERMINA EL TERCER DIV AREA DE LOS BOTONES //
+                        <div class="form-row"><!--Esto indica que es una fila entera-->
+                                    <div class="column-half"><!--Esta es la primera columna de la primera fila-->
+                                         <label for="cant_laminas">CANTIDAD DE LAMINAS A USAR:</label>
+                                         <input type="text" id="canti_laminas" name="canti_laminas" placeholder="Ejemplo: 4, 5.1,15.9,134" required>
+                                    </div><!--Se cierra la primera columna de la primera fila-->
+
+                                    <div class="column-half"> <!--Esta es la segunda columna de la primera fila-->
+                                          <label for="des_laminas">LAMINAS:</label>
+                                          <input type="text" id="des_laminas" name="des_laminas" placeholder="Ejemplo: AGA" required>
+                                    </div><!--Se cierra la segunda columna de la primera fila-->
+                        </div><!--SE CIERRA EL ROW DE LA PRIMERA FILA-->
+
+
+                        <div class="form-row"><!--Empezamos la segunda fila-->
+                                <div class="column-half"><!--Esta es la primera columna de la segunda fila-->
+                                         <label for="la_tamano">TAMAÑO:</label>
+                                        <input type="text" id="lam_tamano" name="lam_tamano" placeholder=" Ejemplo: 740X605"required>
+                                </div><!--Se cierra  la primera columna de la segunda fila-->
+                                <div class="column-half"><!--Esta es la segunda columna de la segunda fila-->
+                                         <label for="tipo_suaje">SUAJE:</label>
+                                            <input type="text" id="tipo_suaje" name="tipo_suaje" placeholder=" Ejemplo: ALMACEN" required>
+                                </div> <!--Cerramos la segunda columna de la segunda fila-->
+                                <div class="column-half"><!--Código para una columna-->
+                                       <label for="des_impre">DESCRIPCIÓN DE IMPRESIÓN:</label>
+                                       <input type="text" id="des_impre" name="des_impre" placeholder=" Ejemplo: IMPRESION 4X0" required>    
+                                       <input type="hidden" name="viene_n_proy" value="<?php echo ($pasa_n_proy); ?>" />
+                                       <input type="hidden" name="viene_pasa_cadena" value="<?php echo ($pasa_cadena); ?>" />
+                                        
+                                    </div> <!-- se cierra  el código para una columna-->
+                        </div> <!--Cerramos EL FORM-ROW la segunda fila-->
+            
+                        <!--<div class="form-row">Empezamos la cuarta
+                                <div class="column-full">
+                                    <input class="cbp-mc-submit" type="submit" value="continuar" />
+                                    
+                                </div> se cierra el de una columna 
+                        </div>termina la cuarta 
+                        <div class="form-row">Empezamos la Quinta
+                                <div class="column-full">Una sola columna
+                                    
+                                    <input class="cbp-mc-submit" type="reset" value="Cancelar" />
+                                </div> se cierra el de una columna
+                        </div>termina la quinta -->
+                        
+                        <!-- ACA AGREGUE PARA LOS BOTONES PERO SE PUEDE BORRAR -->
+                          <!-- ACA TERMINA EL TERCER DIV AREA DE LOS BOTONES -->
                     <div class="cbp-mc-submit-wrap">
                     <input class="cbp-mc-submit" type="submit" value="continuar" />
                     <input class="cbp-mc-submit" type="reset" value="Cancelar" />
                     
                     </div>
-                    // ACA TERMINA CUARTO DIV //
-                    </form>
+
+
+
+                    <!-- ACA TERMINA CUARTO DIV -->
+                     </form>
+                </div><!--Fin del contenedor-->
 
                 
-                 //ACA TERMINA FORMULARIO//
-                 // Aca termina el div del formularios //
-           </div>
-           // Aca termina el div que agregue para borrar //
-        </div>
+                 <!--ACA TERMINA FORMULARIO-->
+                 <!-- Aca termina el div del formularios -->
+            </div><!-- TERMINA PARA ENMARCAR -->
+          
+        </div> <!-- Aca termina el div que agregue para borrar -->
     </div>
 </body>
 </html>
--->
