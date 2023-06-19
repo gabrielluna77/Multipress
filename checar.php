@@ -67,5 +67,5 @@ $_SESSION['clave'] = $_REQUEST['password'];
                   }
 
                     mysqli_close($con);
-                  ?>
+?>
          
