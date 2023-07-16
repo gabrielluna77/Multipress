@@ -20,7 +20,7 @@ else{
 <body>
     <div class="caja-principal">
      <div class="cabecera">
-        <p>ERP Multipress v1.0</p>
+        <p>ERP-OPERADORA VIVANCO-v1.0</p>
     </div>
     <div class="header">
 		<p>Módulos del ERP</p>

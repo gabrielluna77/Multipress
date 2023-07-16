@@ -29,7 +29,6 @@ $cadena ='';
 $folios ='';
 $nom_dis ='';
 //limpiamos los textos que llegan desde el formulario
-
 $nom_proy1 ='';
 $nom_cli ='';
 $nom_prov='';
@@ -40,10 +39,10 @@ $pro3 ='';
 $pro4 ='';
 $can_l ='';
 $lam_l ='';
-
 $pasa_n_proy ='';
 $pasa_cadena ='';
-
+//limpiamos donde llegará el folio
+$esta_foliado ='';
 //$pasar_usuario = include ('nueva_orden.php');
 //printf($pasar_usuario);
 //para que se guarden los acentos y las ñ
@@ -76,72 +75,86 @@ if (!mysqli_set_charset($con, "utf8")) {
     //printf("Conjunto de caracteres actual: %s\n", mysqli_character_set_name($con));
 }
 // TERMINA LA CONEXION Y EL CAMBIO DE CARACTERES
+// Primero el REQUEST DEL FOLIO
+$esta_foliado = $_REQUEST["pasa_folio"];
+//echo ($esta_foliado);
 //_REQUEST
-$nom_proy1 = $_REQUEST["nom_proy"];
-$nombre_proyecto = html_entity_decode($nom_proy1, ENT_QUOTES | ENT_HTML401, "UTF-8");
+//$nom_proy1 = $_REQUEST["nom_proy"];
+//$nombre_proyecto = html_entity_decode($nom_proy1, ENT_QUOTES | ENT_HTML401, "UTF-8");
 //pasamos la variable del nombre de proyecto por el formulario
-$pasa_n_proy = $nombre_proyecto;
+//$pasa_n_proy = $nombre_proyecto;
 $nom_cli = $_REQUEST["nom_cliente"];
 $nombre_cliente = html_entity_decode($nom_cli, ENT_QUOTES | ENT_HTML401, "UTF-8");
-//print "<p> Su $_REQUEST
+//echo ($nombre_cliente);
 $nom_prov = $_REQUEST["nom_prove"];
 $nombre_prov = html_entity_decode($nom_prov, ENT_QUOTES | ENT_HTML401, "UTF-8");
-//print "<p>Su  $_REQUEST
+//echo (nombre_prov);
 $nom_imp = $_REQUEST["nom_imprim"];
 $nom_impresora = html_entity_decode($nom_imp, ENT_QUOTES | ENT_HTML401, "UTF-8");
-//print "<p>Su  $_REQUEST
+//echo ($nom_impresor);
 $pro1 = $_REQUEST["proce1"];
 $pro_ce1 = html_entity_decode($pro1, ENT_QUOTES | ENT_HTML401, "UTF-8");
-//print "<p>Su  $_REQUEST
+//echo ($pro_ce1);
 $pro2 = $_REQUEST["proce2"];
 $pro_ce2 = html_entity_decode($pro2, ENT_QUOTES | ENT_HTML401, "UTF-8");
-//print "<p>Su  $_REQUEST
+//echo ($pro_ce2);
 $pro3 = $_REQUEST["proce3"];
 $pro_ce3 = html_entity_decode($pro3, ENT_QUOTES | ENT_HTML401, "UTF-8");
-//print "<p>Su  $_REQUEST
+//echo ($pro_ce3);
 $pro4 = $_REQUEST["proce4"];
 $pro_ce4 = html_entity_decode($pro4, ENT_QUOTES | ENT_HTML401, "UTF-8");
-//print "<p>Su  $_REQUEST
+//echo ($pro_ce4);
 $can_l = $_REQUEST["can_lam1"];
 $can_la = html_entity_decode($can_l, ENT_QUOTES | ENT_HTML401, "UTF-8");
-//print "<p>Su  $_REQUEST
+//echo ($can_la);
 $lam_l = $_REQUEST["lam_alm1"];
 $lam_alm = html_entity_decode($lam_l, ENT_QUOTES | ENT_HTML401, "UTF-8");
-//print "<p>Su  $_REQUES
+//echo ($lam_alm);
 $las_tamano = $_REQUEST["la_tamano"];
 $lam_tamano = html_entity_decode($las_tamano, ENT_QUOTES | ENT_HTML401, "UTF-8");
-//print "<p>Su  $_REQUEST
+//echo ($lam_tamano);
 $tip_suaje = $_REQUEST["tipo_suaje"];
 $ti_suajes = html_entity_decode($tip_suaje, ENT_QUOTES | ENT_HTML401, "UTF-8");
+//echo ($ti_suajes);
+// Desde aca agregue para hacer un update
+$ssql = "update orden_alt set cliente2='$nombre_cliente', proveedor2='$nombre_prov', impresoras2='$nom_impresora', descrip_proce2_A='$pro_ce1', descrip_proce2_B='$pro_ce2', descrip_proce2_C='$pro_ce3', descrip_proce2_D='$pro_ce4', cant_laminas2='$can_la', laminas_alm2='$lam_alm', tamano2='$lam_tamano', suaje_alm2='$ti_suajes'  Where folio_op = '$esta_foliado'";
+//Checamos si se guardaron
+if($con->query($ssql)) {
+ //echo '<p>SE AGREGÓ EL IMPRESOR</p>';
+} else {
+    echo '<p>Hubo un error al agregar impresor: ' . $con->error . '</p>';
+}
 
+
+// Termina lo que agregue
 
 // Para guardar el id del usuario, la fecha de creación y el folio
-$nom_dis = $_SESSION['usuario'];
+//$nom_dis = $_SESSION['usuario'];
 //print "<p>EL usuario es:  $nom_dis </p>\n";
 
-date_default_timezone_set('America/Mexico_City');
-$fecha =date("Y/m/d H:i:s");
+//date_default_timezone_set('America/Mexico_City');
+//$fecha =date("Y/m/d H:i:s");
 //tomamos el mes y el año
-$mes = date("n");
-$ano = date("Y");
+//$mes = date("n");
+//$ano = date("Y");
 //echo ($fecha);
 //Aca el folio de cada orden
-$folios = 'M';
-$sql = "INSERT INTO orden_alt(clave, fecha_cre_op, meses, anos,  folio_op, nom_disenador, nombre_proy, nom_alternos, cliente, proveedor, impresoras, descrip_proce0_A, descrip_proce0_B, descrip_proce0_C, descrip_proce0_D, cant_laminas, laminas_alm, tamano, suaje_alm) VALUES (NULL, '$fecha','$mes','$ano', '$folios', '$nom_dis', '$nombre_proyecto', NULL, '$nombre_cliente', '$nombre_prov', '$nom_impresora', '$pro_ce1', '$pro_ce2', '$pro_ce3', '$pro_ce4', '$can_la', '$lam_alm', '$lam_tamano', '$ti_suajes')";
-$resultado = mysqli_query($con, $sql) or die ('Error: '. mysqli_error($con));
+//$folios = 'M';
+//$sql = "INSERT INTO orden_alt(cliente1, proveedor1, impresoras1, descrip_proce1_A, descrip_proce1_B, descrip_proce1_C, descrip_proce1_D, cant_laminas1, laminas_alm1, tamano1, suaje_alm1) VALUES ('$nombre_cliente', '$nombre_prov', '$nom_impresora', '$pro_ce1', '$pro_ce2', '$pro_ce3', '$pro_ce4', '$can_la', '$lam_alm', '$lam_tamano', '$ti_suajes')";
+//$resultado = mysqli_query($con, $sql) or die ('Error: '. mysqli_error($con));
 //echo " Todo bien se guardaron los datos";
 //Enseguida sacamos el id y le hacemos update a la tabla
-$id =mysqli_insert_id($con); 
-$cadena = $folios.$id;
+//$id =mysqli_insert_id($con); 
+//$cadena = $folios.$id;
 //Pasamos el folio a una cadena por formulario
-$pasa_cadena = $cadena;
-$ssql = "update orden_alt set folio_op='$cadena' Where clave='$id'";
+//$pasa_cadena = $cadena;
+//$ssql = "update orden_alt set folio_op='$cadena' Where clave='$id'";
 // Ejecutamos la sentencia de actualización
-if($con->query($ssql)) {
+//if($con->query($ssql)) {
  // echo '<p>CONTINUAR CAPTURANDO LA ORDEN</p>';
-} else {
+//} else {
   //echo '<p>Hubo un error al generar folio de orden P.: ' . $con->error . '</p>';
-}
+//}
 //$folios = $folios +1;
 $sql = null;
 $ssql= null;
@@ -174,15 +187,15 @@ mysqli_close($con);
 <div><a href="./ERP-OP-VIVANCO.php"><img src="./imagen/salida.png" alt="nuevo_doc" width="30" height="30">SALIR</a></div>
 </div><!-- aca termina primer contenedor sin problema -->
 <div class="contenedor">
-    <div> ORDEN DE PRODUCCIÓN No.<?php echo ($cadena); ?> </div>
+    <div> ORDEN DE PRODUCCIÓN No.<?php echo ($esta_foliado); ?> </div>
    <div>
-    <h3><?php echo ($nombre_proyecto);  ?> </H3>
+    <h3><?php echo "SE GUARDÓ EL IMPRESOR DE FORMA CORRECTA";  ?> </H3>
     
    
    </div>
    
    <div>
-   <form  method="post" action="respuesta_producto.php" class="cbp-mc-form">
+   <form  method="post" action="respuesta_producto3.php" class="cbp-mc-form">
     <label for="res">¿ Agregar otro Impresor ?</label>
     <select id="res" name="res">
                 <option>SI</option>
@@ -190,16 +203,8 @@ mysqli_close($con);
             </select> 
    </div>
    <div class="cbp-mc-submit-wrap"> 
-   <input type="hidden" name="pasa_folio" value="<?php echo ($cadena); ?>" />  
+   <input type="hidden" name="pasa_folio" value="<?php echo ($esta_foliado); ?>" /> 
     <input class="cbp-mc-submit" type="submit" value="Enviar" />
     
    </form>
    </div>
-        
-    
-    
-          
-
-</div><!-- TERMINA BARRA DEL CONTENIDO -->
-</body>
-</html>

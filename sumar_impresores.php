@@ -10,7 +10,7 @@ function pasar_usuario(){
  $usuario =  $_SESSION['usuario'];
  return $usuario;
 }
-
+$mas_elfolio = $_REQUEST["este_folio"];
 ?>
 
 <!DOCTYPE html>
@@ -38,14 +38,10 @@ function pasar_usuario(){
 <div><a href="./ERP-OP-VIVANCO.php"><img src="./imagen/salida.png" alt="nuevo_doc" width="30" height="30">SALIR</a></div>
 </div>
 <div class="contenedor">
+                
         <div>
-        <form  method="post" action="guardar_orden.php" class="cbp-mc-form">
-        <label for="nom_proy">Nombre del archivo:</label>
-        
-        </div>
-        <div><input type="text" id="nom_proy" size="50"    name="nom_proy" placeholder="OP 02075 GRADUACION" required></div>
-        <div></div>
-        <div>
+        <?php echo ($mas_elfolio); ?>
+        <form  method="post" action="guardar_impresor.php" class="cbp-mc-form">
         <label for="nom_cliente">Cliente:</label>
         <input type="text" id="nom_cliente" size="30" name="nom_cliente" placeholder="BEPENSA" required>
         
@@ -156,8 +152,10 @@ function pasar_usuario(){
             </select> 
         </div>
         <div class="cbp-mc-submit-wrap"> 
+            <input type="hidden" name="pasa_folio" value="<?php echo ($mas_elfolio); ?>" /> 
             <input class="cbp-mc-submit" type="submit" value="continuar" />
             <input class="cbp-mc-submit" type="reset" value="Cancelar" />
+            
 
         </div>
 		</form>
