@@ -125,37 +125,6 @@ if($con->query($ssql)) {
     echo '<p>Hubo un error al agregar impresor: ' . $con->error . '</p>';
 }
 
-
-// Termina lo que agregue
-
-// Para guardar el id del usuario, la fecha de creación y el folio
-//$nom_dis = $_SESSION['usuario'];
-//print "<p>EL usuario es:  $nom_dis </p>\n";
-
-//date_default_timezone_set('America/Mexico_City');
-//$fecha =date("Y/m/d H:i:s");
-//tomamos el mes y el año
-//$mes = date("n");
-//$ano = date("Y");
-//echo ($fecha);
-//Aca el folio de cada orden
-//$folios = 'M';
-//$sql = "INSERT INTO orden_alt(cliente1, proveedor1, impresoras1, descrip_proce1_A, descrip_proce1_B, descrip_proce1_C, descrip_proce1_D, cant_laminas1, laminas_alm1, tamano1, suaje_alm1) VALUES ('$nombre_cliente', '$nombre_prov', '$nom_impresora', '$pro_ce1', '$pro_ce2', '$pro_ce3', '$pro_ce4', '$can_la', '$lam_alm', '$lam_tamano', '$ti_suajes')";
-//$resultado = mysqli_query($con, $sql) or die ('Error: '. mysqli_error($con));
-//echo " Todo bien se guardaron los datos";
-//Enseguida sacamos el id y le hacemos update a la tabla
-//$id =mysqli_insert_id($con); 
-//$cadena = $folios.$id;
-//Pasamos el folio a una cadena por formulario
-//$pasa_cadena = $cadena;
-//$ssql = "update orden_alt set folio_op='$cadena' Where clave='$id'";
-// Ejecutamos la sentencia de actualización
-//if($con->query($ssql)) {
- // echo '<p>CONTINUAR CAPTURANDO LA ORDEN</p>';
-//} else {
-  //echo '<p>Hubo un error al generar folio de orden P.: ' . $con->error . '</p>';
-//}
-//$folios = $folios +1;
 $sql = null;
 $ssql= null;
 $resultado = null;
@@ -180,10 +149,10 @@ mysqli_close($con);
 <body>
 <div class="barra-principal">
 <div><img src="./imagen/logo_principal.png" alt="nuevo_doc" width="40" height="40"></div>
-<div> <a href="./nueva_orden.php"><img src="./imagen/doc.png" alt="nuevo_doc" width="30" height="30">NUEVA ORDEN</a></div>
-<div><a href="./nueva_orden.php"><img src="./imagen/fabrica.png" alt="nuevo_doc" width="30" height="30">EN PRODUCCION</a></div>
-<div><a href="./nueva_orden.php"><img src="./imagen/paquete.png" alt="nuevo_doc" width="30" height="30">POR ENTREGAR</a></div>
-<div><a href="./nueva_orden.php"><img src="./imagen/error.png" alt="nuevo_doc" width="30" height="30">ATRASADAS</a></div>
+<div><img src="./imagen/doc.png" alt="nuevo_doc" width="30" height="30">NUEVA ORDEN</div>
+<div><img src="./imagen/fabrica.png" alt="nuevo_doc" width="30" height="30">EN PRODUCCION</div>
+<div><img src="./imagen/paquete.png" alt="nuevo_doc" width="30" height="30">POR ENTREGAR</div>
+<div><img src="./imagen/error.png" alt="nuevo_doc" width="30" height="30">ATRASADAS</div>
 <div><a href="./ERP-OP-VIVANCO.php"><img src="./imagen/salida.png" alt="nuevo_doc" width="30" height="30">SALIR</a></div>
 </div><!-- aca termina primer contenedor sin problema -->
 <div class="contenedor">

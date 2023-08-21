@@ -14,6 +14,6 @@ $con_elfolio = $_REQUEST["pasa_folio"];
 if($res_recibe === 'SI'){
 header("Location: ./sumar_impresores.php?este_folio=".urlencode($con_elfolio));
 } else {
-echo "se va a continuar con la orden";
+header("Location: ./continuar_ord.php?este_folio=".urlencode($con_elfolio));
 }
 ?>

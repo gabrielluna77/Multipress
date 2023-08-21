@@ -28,8 +28,8 @@ else{
 
 	<div class="contenedor">
 		<div> <a title="Ordenes de producción" href="./produccion.php"><img  src="./imagen/menu_producción.jpg" alt="ordenes de producción"/></a></div>
-		<div> <a title="Ordenes de producción" href="./almacen.php"><img  src="./imagen/menu_almacen.jpg" alt="almacen"/></a></div>
-		<div> <a title="Ordenes de producción" href="./compras.php"><img  src="./imagen/menu_compras.jpg" alt="ordenes de producción"/></a></div>
+		<div> <a title="Ordenes de producción" href="./new_orden.html"><img  src="./imagen/menu_almacen.jpg" alt="almacen"/></a></div>
+		<div> <a title="Ordenes de producción" href="./new_orden.html"><img  src="./imagen/menu_compras.jpg" alt="ordenes de producción"/></a></div>
 		<div> <a title="Ordenes de producción" href="./new_orden.html"><img  src="./imagen/menu_cuentas.jpg" alt="ordenes de producción"/></a></div>
 		<div> <a title="Ordenes de producción" href="./new_orden.html"><img  src="./imagen/menu_logistica.jpg" alt="ordenes de producción"/></a></div>
 		<div> <a title="Ordenes de producción" href="./new_orden.html"><img  src="./imagen/menu_ventas.jpg" alt="ordenes de producción"/></a></div>

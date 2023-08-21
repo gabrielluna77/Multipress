@@ -13,9 +13,9 @@
 <div class="barra-principal">
 <div><img src="./imagen/logo_principal.png" alt="nuevo_doc" width="40" height="40"></div>
 <div> <a href="./nueva_orden.php"><img src="./imagen/doc.png" alt="nuevo_doc" width="30" height="30">NUEVA ORDEN</a></div>
-<div><a href="./nueva_orden.php"><img src="./imagen/fabrica.png" alt="nuevo_doc" width="30" height="30">EN PRODUCCION</a></div>
-<div><a href="./nueva_orden.php"><img src="./imagen/paquete.png" alt="nuevo_doc" width="30" height="30">POR ENTREGAR</a></div>
-<div><a href="./nueva_orden.php"><img src="./imagen/error.png" alt="nuevo_doc" width="30" height="30">ATRASADAS</a></div>
+<div><a href="./con_pro.php"><img src="./imagen/fabrica.png" alt="nuevo_doc" width="30" height="30">EN PRODUCCION</a></div>
+<div><a href="./con_cami.php"><img src="./imagen/paquete.png" alt="nuevo_doc" width="30" height="30">POR ENTREGAR</a></div>
+<div><a href="./con_fuera.php"><img src="./imagen/error.png" alt="nuevo_doc" width="30" height="30">ATRASADAS</a></div>
 <div><a href="./ERP-OP-VIVANCO.php"><img src="./imagen/salida.png" alt="nuevo_doc" width="30" height="30">SALIR</a></div>
 </div><!-- termina barra principal-->
 <div class="barra-del-contenido">
@@ -23,9 +23,14 @@
         <div>Ordenes por mes</div>
         <div>Papel pendiente de entregar</div>
         <div><a href="./Menu_principal.php">REGRESAR A MENÚ</a></div>
-        <div>Buscar orden de producción</div>
+        <div><a href="./buscar_ord.php">Buscar orden de producción</a></div>
      </div><!--termina barra lateral-->
   <div class="barra-de-trabajo">
+       Filtrar la busqueda para localizar la OP.
+       <form method="post" action="loap_op.php">
+        <label for="busqueda">Buscar: </label>
+        <input type="text" name="busqueda" id="busqueda">
+        </form>
      <div class="container">
         <div class="row">
              <?php
@@ -82,25 +87,27 @@
             <th scope="coL">Fecha:</th>
             <th scope="coL">Orden de producción:</th>
             <th scope="coL">Nombre del proyecto:</th>
-            <th scope="coL">Cliente:</th>
-            <th  scope="coL">Fecha de Producción:</th>
-            <th  scope="coL">Fecha de entrega:</th>
-            <th scope="coL">Status:</th>        
+            <th scope="coL">     </th> 
+            <th scope="coL">     </th> 
+            <th scope="coL">     </th> 
+            <th scope="coL">Status:</th> 
+            <th scope="coL">     </th> 
             <th scope="coL">Editar</th>			  
             </tr>
             </thead>
             <tbody>
             <?php foreach ($productos as $producto) { ?>
             <tr>
-            <td><?php echo $producto->clave?></td>
-            <td><?php echo $producto->fecha_cre_op?></td>
-            <td><?php echo $producto->folio_op ?></td>
-            <td><?php echo $producto->nombre_proy?></td>
-            <td><?php echo $producto->cliente?></td>
-            <td><?php echo $producto->fecha_prod?></td>
-            <td><?php echo $producto->fecha_entrega ?></td>
-            <td><?php echo $producto->status ?></td>                   
-            <td><a  href="<?php echo "editar.php?id=" . $producto->clave?>"> <img src="./imgmenu/logo_editar.png" alt="imagen editar" width="50" height="50" /><i class="fa fa-edit"></i></a></td>
+            <td><?php echo $producto->clave;?></td>
+            <td><?php echo $producto->fecha_cre_op; ?></td>
+            <td><a  href="<?php echo "al_detalle_ord.php?folios=".$producto->folio_op;?>"><?php echo $producto->folio_op; ?></a></td>
+            <td><?php echo $producto->nombre_proy;?></td>
+            <td><?php echo "   "; ?></td>
+            <td><?php echo "   "; ?></td> 
+            <td><?php echo "   "; ?></td>
+            <td style="color:#836C02"><?php echo $producto->status; ?></td>   
+            <td><?php echo "   "; ?></td>                
+            <td><a  href="<?php echo "editar.php?id=".$producto->clave;?>"> <img src="./imgmenu/logo_editar.png" alt="imagen editar" width="50" height="50" /><i class="fa fa-edit"></i></a></td>
             </tr>
             <?php } ?>
             </tbody>
@@ -108,35 +115,35 @@
             <nav>
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                <p>Mostrando <?php echo $conteo?> de <?php echo $productosPorPagina?> Ordenes por página</p>
+                <p>Mostrando <?php echo $conteo;?> de <?php echo $productosPorPagina;?> Ordenes por página</p>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                <p>Página <?php echo $pagina ?> de <?php echo $paginas ?> </p>
+                <p>Página <?php echo $pagina; ?> de <?php echo $paginas; ?> </p>
                 </div>
             </div><!-- termina div row -->
-            <ul class="pagination">
+            <table class="pagination">
             <!-- Si la página actual es mayor a uno, mostramos el botón para ir una página atrás -->
            <?php if ($pagina > 1) { ?>
-             <li>
-             <a href="./junta_prod.php?pagina=<?php echo $pagina - 1 ?>">
+             <tr><td>
+             <a href="./pro_la.php?pagina=<?php echo $pagina - 1 ;?>">
              <span aria-hidden="true">&laquo;</span></a>
-             </li>
+           </td>
              <?php } ?>
              <div> <!-- inicia div normal -->
                 <!-- Mostramos enlaces para ir a todas las páginas. Es un simple ciclo for-->
                 <?php for ($x = 1; $x <= $paginas; $x++) { ?>
-                <ti class="<?php if ($x == $pagina) echo "active" ?>">
-                <a href="./junta_prod.php?pagina=<?php echo $x ?>">
-                <?php echo $x ?></a>
+                <ti class="<?php if ($x == $pagina) echo "active"; ?>">
+                <a href="./pro_la.php?pagina=<?php echo $x; ?>">
+                <?php echo $x; ?></a>
                 <?php } ?>
                 <!-- Si la página actual es menor al total de páginas, mostramos un botón para ir una página adelante -->
                 <?php if ($pagina < $paginas) { ?>
-            <li>
-                <a href="./junta_prod.php?pagina=<?php echo $pagina + 1 ?>">
+            <td>
+                <a href="./pro_la.php?pagina=<?php echo $pagina + 1; ?>">
                 <span aria-hidden="true">&raquo;</span></a>
-            </li>
+            </td></tr>
             <?php } ?>
-            </ul>
+                </table>
             </div><!-- termina div normal -->
             </nav>
         </div> <!--termina col-x -->
